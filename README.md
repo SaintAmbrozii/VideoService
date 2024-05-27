@@ -1,2 +1,2 @@
 Simple WebFlux Video Service with Upload files to resource and saving to Postgress dabadase
-![postman-inna](https://github.com/SaintAmbrozii/VideoService/assets/125075635/d1690caa-4b89-468e-b8db-5b6223b1a277)
+![postman-inna-2](https://github.com/SaintAmbrozii/VideoService/assets/125075635/46120fd1-6d30-451a-98ca-66f11fe38b13)
