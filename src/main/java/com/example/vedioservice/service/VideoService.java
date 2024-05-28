@@ -47,6 +47,10 @@ public class VideoService {
         return videoRepository.findById(id);
     }
 
+    public Mono<Void> delete (VideoFile videoFile) {
+       return videoRepository.delete(videoFile);
+    }
+
 
 
 

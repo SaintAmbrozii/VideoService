@@ -82,7 +82,8 @@ public class VideoController {
     }
 
 
-    @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE,
+            consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public Mono<VideoFile> upload(@RequestPart(value = "video",required = true) Mono<FilePart> filePartMono,
                                   @RequestPart(value = "data",required = false) FileDataRecord dataRecord) {
         return filePartMono.flatMap(
@@ -110,6 +111,17 @@ public class VideoController {
                 }
         );
 
+    }
+    @DeleteMapping("{id}")
+    public Mono<VideoFile> deleteVideo(@PathVariable(name = "id") Long id) {
+        return videoService.findById(id)
+                .flatMap(videoFile -> {
+                return fileService.deleteFile(Path.of(videoFile.getRootPath()))
+                        .switchIfEmpty(Mono.error(VideoNotFoundException::new))
+                            .doOnNext(file->videoRepository.delete(videoFile))
+                          .then(Mono.empty());
+
+                });
     }
 
 
